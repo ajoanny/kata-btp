@@ -78,15 +78,17 @@ describe('CLITest', function () {
     });
 
 
-    describe('?', function () {
-        it('works', function () {
+    describe('create a command', function () {
+        it('creates a command with perpend', function () {
 
             var output = stdout.inspectSync(function () {
                 // Given
                 var i = 0;
                 var prompt = () => {
+                    const commands = ['order', 'prepend', '10', 'stop', 'quit'];
+                    const command = commands[i];
                     i++;
-                    return i > 1 ? 'quit' : 'help';
+                    return command;
                 };
 
                 // Don't forget to decomment the line on CLI.js!!!!!
@@ -101,18 +103,21 @@ describe('CLITest', function () {
             assert.deepEqual(
                 output,
                 [
-                    "\n--------------------------------------------------------------------------------\n",
-                    "          Welcome to Efficent Command System 2.0\n",
-                    "--------------------------------------------------------------------------------\n\n",
-                    "\nUnknown command\nThe available commands are the following : \n\n",
-                    "quit - quit the program\n",
-                    "order - create a new command\n",
-                    "help - displays the help\n",
-                    "\n",
-                    "\n--------------------------------------------------------------------------------\n",
-                    "          System stopped\n",
-                    "--------------------------------------------------------------------------------\n\n"
-                ]
+                        "\n--------------------------------------------------------------------------------\n",
+                        "          Welcome to Efficent Command System 2.0\n",
+                        "--------------------------------------------------------------------------------\n\n",
+                        "\n--------------------------------------------------------------------------------\n",
+                        "          Order Menu\n",
+                        "--------------------------------------------------------------------------------\n\n",
+                        "New order created.\n",
+                        "Add new elements to your order\n",
+                        "\nHow many perpends palets do you need ?\n",
+                        "\nQuit Order Menu\n\n",
+                        "\n--------------------------------------------------------------------------------\n",
+                        "          System stopped\n",
+                        "--------------------------------------------------------------------------------\n\n",
+                    ]
+
             );
 
         });
