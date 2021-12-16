@@ -2,6 +2,7 @@ var assert = require("assert");
 var CLI = require("../CLI.js");
 var stdout = require("test-console").stdout;
 var sinon = require("sinon");
+const fs = require("fs");
 sinon.stub(process, "exit");
 
 describe("CLITest", function() {
@@ -123,6 +124,11 @@ describe("CLITest", function() {
   });
 
   describe("verify generated file", function() {
+
+    afterEach(function () {
+      fs.unlinkSync('./2021-12-16-orders.csv');
+    });
+
     it("should read file", function() {
 
 
@@ -145,25 +151,10 @@ describe("CLITest", function() {
       });
 
       // Then
-      assert.deepEqual(
-        output,
-        [
-          "\n--------------------------------------------------------------------------------\n",
-          "          Welcome to Efficent Command System 2.0\n",
-          "--------------------------------------------------------------------------------\n\n",
-          "\n--------------------------------------------------------------------------------\n",
-          "          Order Menu\n",
-          "--------------------------------------------------------------------------------\n\n",
-          "New order created.\n",
-          "Add new elements to your order\n",
-          "\nHow many perpends palets do you need ?\n",
-          "\nQuit Order Menu\n\n",
-          "\n--------------------------------------------------------------------------------\n",
-          "          System stopped\n",
-          "--------------------------------------------------------------------------------\n\n"
-        ]
-      );
-
+      const data = fs.readFileSync('2021-12-16-orders.csv', 'utf-8').split('\n');
+      assert.equal(data[0], 'id; Date;Perpend Palets;Copper Wire Coils;Copper Wire Meters;');
+      assert.equal(data[1], '2021-12-16;010;0;0');
     });
   });
+
 });
