@@ -6,8 +6,9 @@ let uuidv1 = require('uuid/v1');
 
 class Command {
 
-  constructor()
+  constructor(uuid_gen = uuidv1)
   {
+    this.uuid_gen = uuid_gen
     this.prepend = new Prepend();
     this.copperWire = new CopperWire();
   }
@@ -24,7 +25,7 @@ class Command {
 
 
   save(){
-    var id = uuidv1();
+    var id = this.uuid_gen();
     let header = "id; Date;Perpend Palets;Copper Wire Coils;Copper Wire Meters;";
     let jour = moment().format('YYYY-MM-DD');
     var File_Name = "./" + jour + "-orders.csv";

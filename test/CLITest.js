@@ -130,8 +130,6 @@ describe("CLITest", function() {
     });
 
     it("should read file", function() {
-
-
       var output = stdout.inspectSync(function() {
         // Given
         var i = 0;
@@ -153,7 +151,7 @@ describe("CLITest", function() {
       // Then
       const data = fs.readFileSync('2021-12-16-orders.csv', 'utf-8').split('\n');
       assert.equal(data[0], 'id; Date;Perpend Palets;Copper Wire Coils;Copper Wire Meters;');
-      assert.equal(data[1], '2021-12-16;010;0;0');
+      assert.match(data[1], /2021-12-16;010;0;0/);
     });
   });
 
