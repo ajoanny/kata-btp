@@ -122,4 +122,50 @@ describe('CLITest', function () {
 
         });
     });
+
+    describe('verify generated file', function () {
+        it('should read file', function () {
+
+
+            var output = stdout.inspectSync(function () {
+                // Given
+                var i = 0;
+                var prompt = () => {
+                    const commands = ['order', 'prepend', '10', 'save', 'stop', 'quit'];
+                    const command = commands[i];
+                    i++;
+                    return command;
+                };
+
+                // Don't forget to decomment the line on CLI.js!!!!!
+                // If not decomment, the test won't work!!!!!
+                dacli = new CLI(prompt);
+
+                // When
+                dacli.main();
+            });
+
+            // Then
+            assert.deepEqual(
+                output,
+                [
+                        "\n--------------------------------------------------------------------------------\n",
+                        "          Welcome to Efficent Command System 2.0\n",
+                        "--------------------------------------------------------------------------------\n\n",
+                        "\n--------------------------------------------------------------------------------\n",
+                        "          Order Menu\n",
+                        "--------------------------------------------------------------------------------\n\n",
+                        "New order created.\n",
+                        "Add new elements to your order\n",
+                        "\nHow many perpends palets do you need ?\n",
+                        "\nQuit Order Menu\n\n",
+                        "\n--------------------------------------------------------------------------------\n",
+                        "          System stopped\n",
+                        "--------------------------------------------------------------------------------\n\n",
+                    ]
+
+            );
+
+        });
+    });
 });
