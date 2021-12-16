@@ -1,40 +1,38 @@
-var COMMAND = require('./Command.js');
+var COMMAND = require("./Command.js");
 
 class CLI {
-  constructor(prompt)
-  {
+  constructor(prompt) {
     // TODO FIXME !!!!!!!! Decomment the line after this one if you want to run tests !!!!!!!!!
     this.prompt = prompt;
-    this.COMMANDS = ["quit - quit the program",                     "order - create a new command",                     "help - " + "displays the help"];
+    this.COMMANDS = ["quit - quit the program", "order - create a new command", "help - " + "displays the help"];
     this.showDivider("Welcome to Efficent Command System 2.0");
-}
+  }
 
-  main()
-  {
+  main() {
 
     this.loop();
   };
 
-  loop(){
-    var n = this.prompt('Enter command : ');
+  loop() {
+    var n = this.prompt("Enter command : ");
 
     switch (n) {
-    case "quit" :
-      this.showDivider("System stopped");
-      process.exit();
-      break;
-    case "order":
-      this.createOrder();
-      break;
-    default:
-      this.showHelp();
-      this.loop();
-    };
+      case "quit" :
+        this.showDivider("System stopped");
+        process.exit();
+        break;
+      case "order":
+        this.createOrder();
+        break;
+      default:
+        this.showHelp();
+        this.loop();
+    }
+
 
   }
 
-  createOrder()
-  {
+  createOrder() {
     this.order = new COMMAND();
 
     this.showDivider("Order Menu");
@@ -45,64 +43,65 @@ class CLI {
     this.orderLoop();
   }
 
-  addStuff(order){
+  addStuff(order) {
     var v = this.prompt("\nWhat do you want to add to order: ");
-    var  quantity=0;
+    var quantity = 0;
     switch (v) {
-    case "prepend" :
-      console.log("\nHow many perpends palets do you need ?");
-      quantity = this.prompt("Enter quantity : ");
-      this.order.addPrepend(quantity);
-      break;
-    case "wire":
-      console.log("\nHow many copper wire meters do you need ?");
-      quantity = this.prompt("Enter quantity : ");
-      this.order.addCopperWire(quantity);
-      break;
-    default:
-      console.info("\nNothing added");
+      case "prepend" :
+        console.log("\nHow many perpends palets do you need ?");
+        quantity = this.prompt("Enter quantity : ");
+        this.order.addPrepend(quantity);
+        break;
+      case "wire":
+        console.log("\nHow many copper wire meters do you need ?");
+        quantity = this.prompt("Enter quantity : ");
+        this.order.addCopperWire(quantity);
+        break;
+      default:
+        console.info("\nNothing added");
     }
   };
 
 
-  orderLoop(){
+  orderLoop() {
     var c = this.prompt("\nEnter order command : ");
 
     switch (c.trim()) {
-    case "show":
-      this.showOrder();
-      break;
-    case "add":
-      this.addStuff(this.order);
-      break;
-    case "save":
-      this.order.save();
-    case "stop":
-      console.log("\nQuit Order Menu\n");
-      this.loop();
-      return;
-    default:
-      this.showHelp();
-    };
+      case "show":
+        this.showOrder();
+        break;
+      case "add":
+        this.addStuff(this.order);
+        break;
+      case "save":
+        this.order.save();
+      case "stop":
+        console.log("\nQuit Order Menu\n");
+        this.loop();
+        return;
+      default:
+        this.showHelp();
+    }
+
     this.orderLoop();
   }
-  showOrder()
-  {
+
+  showOrder() {
     this.order.show();
   }
+
   showHelp() {
     console.log("\nUnknown command\nThe available commands are the following : \n");
-    for (var i = 0; i < this.COMMANDS.length; i++)
-    {
+    for (var i = 0; i < this.COMMANDS.length; i++) {
       console.log(this.COMMANDS[i]);
     }
     console.log("");
 
-   }
+  }
 
-  showDivider(title){
+  showDivider(title) {
     console.log("\n--------------------------------------------------------------------------------");
-    console.log("          "+title);
+    console.log("          " + title);
     console.log("--------------------------------------------------------------------------------\n");
   }
 
