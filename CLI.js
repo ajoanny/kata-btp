@@ -1,12 +1,10 @@
 var COMMAND = require('./Command.js');
 
-var prompt = require('synchro-prompt');
-
 class CLI {
-  constructor(s)
+  constructor(prompt)
   {
     // TODO FIXME !!!!!!!! Decomment the line after this one if you want to run tests !!!!!!!!!
-    //prompt = s;
+    this.prompt = prompt;
     this.COMMANDS = ["quit - quit the program",                     "order - create a new command",                     "help - " + "displays the help"];
     this.showDivider("Welcome to Efficent Command System 2.0");
 }
@@ -18,7 +16,7 @@ class CLI {
   };
 
   loop(){
-    var n = prompt('Enter command : ');
+    var n = this.prompt('Enter command : ');
 
     switch (n) {
     case "quit" :
@@ -48,17 +46,17 @@ class CLI {
   }
 
   addStuff(order){
-    var v = prompt("\nWhat do you want to add to order: ");
+    var v = this.prompt("\nWhat do you want to add to order: ");
     var  quantity=0;
     switch (v) {
     case "prepend" :
       console.log("\nHow many perpends palets do you need ?");
-      quantity = prompt("Enter quantity : ");
+      quantity = this.prompt("Enter quantity : ");
       this.order.addPrepend(quantity);
       break;
     case "wire":
       console.log("\nHow many copper wire meters do you need ?");
-      quantity = prompt("Enter quantity : ");
+      quantity = this.prompt("Enter quantity : ");
       this.order.addCopperWire(quantity);
       break;
     default:
@@ -68,7 +66,7 @@ class CLI {
 
 
   orderLoop(){
-    var c = prompt("\nEnter order command : ");
+    var c = this.prompt("\nEnter order command : ");
 
     switch (c.trim()) {
     case "show":

@@ -1,5 +1,6 @@
+var prompt = require('synchro-prompt');
 
 var CLI = require('./CLI.js')
 
-var monCLI = new CLI()
+var monCLI = new CLI(prompt)
 monCLI.main()
