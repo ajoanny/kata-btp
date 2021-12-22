@@ -57,3 +57,9 @@ varient souvent. On n'a pas d'informations définitives à donner maintenant,
 il faudra demander en temps utile.
 
 En tout cas, faites vite tout ça c'est urgent ! Merci !
+
+## References
+
+À propos du pattern Golden Master :
+
+- <https://blog.thecodewhisperer.com/permalink/surviving-legacy-code-with-golden-master-and-sampling>

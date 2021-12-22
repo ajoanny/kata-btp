@@ -42,9 +42,9 @@ class Command {
       fs.appendFileSync(file, ";");
       fs.appendFileSync(file, this.prepend.getQuantity());
       fs.appendFileSync(file, ";");
-      fs.appendFileSync(file, this.copperWire.getWireQuantity()["coil"]);
+      fs.appendFileSync(file, this.copperWire.getWireQuantity()["coil"].toString());
       fs.appendFileSync(file, ";");
-      fs.appendFileSync(file, this.copperWire.getWireQuantity()["wire"]);
+      fs.appendFileSync(file, this.copperWire.getWireQuantity()["wire"].toString());
       fs.appendFileSync(file, "\n");
     } catch (e) {
       console.error(e);
