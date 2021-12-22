@@ -1,38 +1,35 @@
-var CopperWire = require('./CopperWire.js');
-let moment = require('moment');
-var Prepend = require('./Perpend.js');
-let uuidv1 = require('uuid/v1');
-
+var CopperWire = require("./CopperWire.js");
+let moment = require("moment");
+var Prepend = require("./Perpend.js");
+let uuidv1 = require("uuid/v1");
 
 class Command {
-
-  constructor()
-  {
+  constructor() {
     this.prepend = new Prepend();
     this.copperWire = new CopperWire();
   }
 
-  addPrepend(quantity){
+  addPrepend(quantity) {
     this.prepend.addQuantity(quantity);
   }
 
-  show(){
+  show() {
     console.log("\nThe order contains:\n");
     this.prepend.show();
     this.copperWire.show();
   }
 
-
-  save(){
+  save() {
     var id = uuidv1();
-    let header = "id; Date;Perpend Palets;Copper Wire Coils;Copper Wire Meters;";
-    let jour = moment().format('YYYY-MM-DD');
+    let header =
+      "id; Date;Perpend Palets;Copper Wire Coils;Copper Wire Meters;";
+    let jour = moment().format("YYYY-MM-DD");
     var File_Name = "./" + jour + "-orders.csv";
 
     try {
-      var fs = require('fs');
+      var fs = require("fs");
 
-      var file = fs.openSync(File_Name, 'ax')
+      var file = fs.openSync(File_Name, "ax");
       //Write the CSV file header
       fs.appendFileSync(file, header);
       //Add a new line separator after the header
@@ -49,26 +46,21 @@ class Command {
       fs.appendFileSync(file, ";");
       fs.appendFileSync(file, this.copperWire.getWireQuantity()["wire"]);
       fs.appendFileSync(file, "\n");
-    }
-    catch (e)
-    {
+    } catch (e) {
       console.error(e);
-    }
-    finally {
-      try{
+    } finally {
+      try {
         console.log("Order Saved");
-        fs.closeSync(file)
-      }
-      catch(e){
+        fs.closeSync(file);
+      } catch (e) {
         console.log("Error !!!");
         console.log(e);
       }
     }
-
   }
-  addCopperWire( quantity) {
+  addCopperWire(quantity) {
     this.copperWire.addQuantity(quantity);
   }
 }
 
-module.exports = (Command);
+module.exports = Command;

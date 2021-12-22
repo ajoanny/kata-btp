@@ -1,17 +1,16 @@
-class Prepend
-{
-  constructor(){
-    this.quantity=0;
+class Prepend {
+  constructor() {
+    this.quantity = 0;
   }
-  getQuantity(){
+  getQuantity() {
     return this.quantity;
   }
-  addQuantity(numbre){
+  addQuantity(numbre) {
     this.quantity = this.quantity + numbre;
   }
 
-  show(){
+  show() {
     console.log(" - " + this.quantity + " perpend palets");
   }
 }
-module.exports = (Prepend);
+module.exports = Prepend;
