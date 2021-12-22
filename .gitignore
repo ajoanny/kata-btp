@@ -1,6 +1,6 @@
 
 kata-btp-js.iml
-*.csv
+out
 
 # Created by https://www.gitignore.io/api/node,intellij+all
 

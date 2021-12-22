@@ -4,7 +4,9 @@ var Prepend = require("./Perpend.js");
 let uuidv1 = require("uuid/v1");
 
 class Command {
-  constructor() {
+  constructor(filename, id) {
+    this.id = id;
+    this.filename = filename;
     this.prepend = new Prepend();
     this.copperWire = new CopperWire();
   }
@@ -20,11 +22,11 @@ class Command {
   }
 
   save() {
-    var id = uuidv1();
+    var id = this.id || uuidv1();
     let header =
       "id; Date;Perpend Palets;Copper Wire Coils;Copper Wire Meters;";
     let jour = moment().format("YYYY-MM-DD");
-    var File_Name = "./" + jour + "-orders.csv";
+    var File_Name = this.filename || "./" + jour + "-orders.csv";
 
     try {
       var fs = require("fs");
@@ -40,11 +42,17 @@ class Command {
       fs.appendFileSync(file, ";");
       fs.appendFileSync(file, jour);
       fs.appendFileSync(file, ";");
-      fs.appendFileSync(file, this.prepend.getQuantity());
+      fs.appendFileSync(file, this.prepend.getQuantity().toString());
       fs.appendFileSync(file, ";");
-      fs.appendFileSync(file, this.copperWire.getWireQuantity()["coil"].toString());
+      fs.appendFileSync(
+        file,
+        this.copperWire.getWireQuantity()["coil"].toString()
+      );
       fs.appendFileSync(file, ";");
-      fs.appendFileSync(file, this.copperWire.getWireQuantity()["wire"].toString());
+      fs.appendFileSync(
+        file,
+        this.copperWire.getWireQuantity()["wire"].toString()
+      );
       fs.appendFileSync(file, "\n");
     } catch (e) {
       console.error(e);
