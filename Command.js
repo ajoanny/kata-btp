@@ -4,8 +4,9 @@ var Prepend = require("./Perpend.js");
 let uuidv1 = require("uuid/v1");
 
 class Command {
-  constructor(filename, id) {
+  constructor(filename, id, jour) {
     this.id = id;
+    this.jour = jour;
     this.filename = filename;
     this.prepend = new Prepend();
     this.copperWire = new CopperWire();
@@ -25,7 +26,7 @@ class Command {
     var id = this.id || uuidv1();
     let header =
       "id; Date;Perpend Palets;Copper Wire Coils;Copper Wire Meters;";
-    let jour = moment().format("YYYY-MM-DD");
+    let jour = this.jour || moment().format("YYYY-MM-DD");
     var File_Name = this.filename || "./" + jour + "-orders.csv";
 
     try {
